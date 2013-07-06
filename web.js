@@ -1,14 +1,12 @@
 var express = require('express');
-
+var sys=require("sys"), fs = require("fs");
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-    fs.readFile('~/assignment/bitstarter/index.html', function(err, data){
-	if(err) throw err;
-	var buffer = new Buffer (data, "utf-8");
-	response.send(buffer.toString('utf8',0,buffer.length));
-}
-
+    var buffer = fs.readFileSync('index.html');
+    console.log(buffer.toString());
+	response.send(buffer.toString());
+});
 });
 
 var port = process.env.PORT || 5000;
